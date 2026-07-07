@@ -1,0 +1,28 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Festrips Button Chatbot</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="site-preview" id="sitePreview">
+    <div class="preview-copy">
+      <div class="brand-row"><span class="brand-mark">F</span><div><strong>Festrips</strong><span>Button FAQ Chatbot</span></div></div>
+      <h1>Scenario chatbot for fixed FAQ flows.</h1>
+      <p>This version does not use an AI API. It guides users through prepared FAQ buttons and support handoff forms.</p>
+      <button class="open-chat-button" id="openChat" type="button">Open Button Chatbot</button>
+    </div>
+  </main>
+  <section class="chat-stage is-hidden" id="chatStage">
+    <section class="chatbot">
+      <header class="chatbot-header"><div class="brand-row"><span class="brand-mark">F</span><div><strong>Festrips Button Assistant</strong><span><i></i> Scenario Mode</span></div></div><div class="header-actions"><select id="languageSelect" aria-label="Language"><option value="en">EN</option><option value="ko">KO</option><option value="tl">TL</option></select><button id="closeChat" class="icon-button" type="button">X</button></div></header>
+      <div class="chatbot-body" id="chatBody"><div class="empty-state" id="emptyState"><span class="empty-mark">F</span><h2>Choose a support topic</h2><p>This version works through predefined buttons.</p><div class="starter-grid" id="starterGrid"></div></div></div>
+      <footer class="chatbot-footer"><div class="case-strip is-hidden" id="caseStrip"><span id="caseIntent">Intent: General</span><span id="caseBooking">Booking: Not provided</span><span id="caseStatus">Status: Self-service</span></div><form class="composer" id="messageForm"><input id="messageInput" autocomplete="off" placeholder="Type a keyword or choose a button..."><button type="submit">Send</button></form></footer>
+    </section>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>
+

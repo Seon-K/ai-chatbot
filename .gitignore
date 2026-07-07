@@ -1,0 +1,4 @@
+.env
+node_modules/
+report-chatbot-shots/
+_doc_review/

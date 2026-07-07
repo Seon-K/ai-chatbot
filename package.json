@@ -1,0 +1,13 @@
+{
+  "name": "festrips-chatbot-mvp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Festrips AI chatbot MVP with static frontend and Node.js backend API.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

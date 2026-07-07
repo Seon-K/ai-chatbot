@@ -1,0 +1,27 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Festrips AI Chatbot</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="site-preview" id="sitePreview">
+    <div class="preview-copy">
+      <div class="brand-row"><span class="brand-mark">F</span><div><strong>Festrips</strong><span>AI API Chatbot</span></div></div>
+      <h1>AI support that answers from Festrips knowledge.</h1>
+      <p>This version sends free-text questions to the AIHub Gateway through the local server. API key stays server-side.</p>
+      <button class="open-chat-button" id="openChat" type="button">Open AI Chatbot</button>
+    </div>
+  </main>
+  <section class="chat-stage is-hidden" id="chatStage">
+    <section class="chatbot">
+      <header class="chatbot-header"><div class="brand-row"><span class="brand-mark">F</span><div><strong>Festrips AI Assistant</strong><span><i></i> AI Gateway Mode</span></div></div><div class="header-actions"><select id="languageSelect"><option value="en">EN</option><option value="ko">KO</option><option value="tl">TL</option></select><button id="closeChat" class="icon-button" type="button">X</button></div></header>
+      <div class="chatbot-body" id="chatBody"><div class="empty-state" id="emptyState"><span class="empty-mark">F</span><h2>Ask Festrips anything</h2><p>Type naturally. The AI answers from the approved Festrips knowledge base.</p><div class="starter-grid" id="starterGrid"><button data-example="Can I refund my flight booking?">Refund rules</button><button data-example="Is my hotel booking confirmed immediately?">Hotel confirmation</button><button data-example="I need help with booking FT-12345">Existing booking</button><button data-example="How do tour package deposits work?">Tour deposits</button></div></div></div>
+      <footer class="chatbot-footer"><div class="case-strip is-hidden" id="caseStrip"><span id="caseIntent">Mode: AI</span><span id="caseBooking">Booking: Not provided</span><span id="caseStatus">Status: AI response</span></div><form class="composer" id="messageForm"><input id="messageInput" autocomplete="off" placeholder="Ask a Festrips question..."><button type="submit">Send</button></form></footer>
+    </section>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>
