@@ -31,6 +31,7 @@ const ui = {
     welcome: 'Welcome to Festrips. Please choose a prepared support topic.',
     chooseAnother: 'Sure. Please choose another topic.',
     fallback: 'Please choose one of the prepared topics below.',
+    loading: 'One moment, preparing the answer...',
     support: 'Please provide your name, contact, booking code if any, and concern. A Festrips team member should review booking-specific issues.',
     end: 'Thank you for contacting Festrips. You can close this chat or reopen the chatbot if you need more help later.',
     prepared: 'View common questions',
@@ -79,6 +80,7 @@ const ui = {
     welcome: 'Festrips에 오신 것을 환영합니다. 준비된 문의 유형을 선택해 주세요.',
     chooseAnother: '좋습니다. 다른 문의 유형을 선택해 주세요.',
     fallback: '아래 준비된 문의 유형 중 하나를 선택해 주세요.',
+    loading: '잠시만 기다려 주세요. 답변을 준비하고 있습니다...',
     support: '이름, 연락처, 예약 코드가 있다면 예약 코드, 문의 내용을 남겨주세요. 예약별 확인은 Festrips 담당자 검토가 필요합니다.',
     end: 'Festrips에 문의해 주셔서 감사합니다. 채팅을 닫거나 나중에 다시 열어 문의하실 수 있습니다.',
     prepared: '자주 묻는 질문 보기',
@@ -127,6 +129,7 @@ const ui = {
     welcome: 'Welcome sa Festrips. Pumili ng nakahandang support topic.',
     chooseAnother: 'Sige. Pumili pa ng ibang topic.',
     fallback: 'Pumili ng isa sa mga nakahandang topic sa ibaba.',
+    loading: 'Sandali lang, inihahanda ko ang sagot...',
     support: 'Pakibigay ang pangalan, contact, booking code kung mayroon, at concern. Kailangang i-review ng Festrips team ang booking-specific issues.',
     end: 'Salamat sa pakikipag-ugnayan sa Festrips. Maaari mong isara ang chat o buksan ulit kung kailangan mo pa ng tulong.',
     prepared: 'Tingnan ang common questions',
@@ -282,6 +285,19 @@ function bot(content) {
   row.innerHTML = `<div class="avatar">F</div><div class="bubble-wrap"><div class="bubble">${content}</div><div class="meta">${text('meta')}</div></div>`;
   chatBody.append(row);
   scrollDown();
+}
+
+function botLoading(content, after) {
+  const row = document.createElement('div');
+  row.className = 'message-row typing-row';
+  row.innerHTML = `<div class="avatar">F</div><div class="bubble-wrap"><div class="bubble loading-bubble"><span class="loading-spinner" aria-hidden="true"></span><span>${text('loading')}</span></div><div class="meta">${text('meta')}</div></div>`;
+  chatBody.append(row);
+  scrollDown();
+  window.setTimeout(() => {
+    row.remove();
+    bot(content);
+    if (after) after();
+  }, 380);
 }
 
 function user(content) {
@@ -489,8 +505,9 @@ chatBody.onclick = event => {
   if (button.dataset.topic) {
     const item = topics[button.dataset.topic].faqs[language][Number(button.dataset.index)];
     user(item[0]);
-    bot(item[1]);
-    if (button.dataset.topic === 'Cancellation / Refund' || item[0].toLowerCase().includes('refund') || item[0].toLowerCase().includes('cancellation') || item[0].includes('환불') || item[0].includes('취소') || item[0].toLowerCase().includes('rebook')) { support(item[0]); } else { renderNextActions(); }
+    botLoading(item[1], () => {
+      if (button.dataset.topic === 'Cancellation / Refund' || item[0].toLowerCase().includes('refund') || item[0].toLowerCase().includes('cancellation') || item[0].includes('환불') || item[0].includes('취소') || item[0].toLowerCase().includes('rebook')) { support(item[0]); } else { renderNextActions(); }
+    });
     return;
   }
   if (button.dataset.support) { user(text('talkSupport')); support(); }
@@ -516,7 +533,7 @@ messageForm.onsubmit = event => {
   const lowerValue = value.toLowerCase();
   const match = (lowerValue.includes('refund') || lowerValue.includes('cancel') || lowerValue.includes('환불') || lowerValue.includes('취소')) ? 'Cancellation / Refund' : Object.keys(topics).find(key => lowerValue.includes(key.toLowerCase().split(' ')[0]));
   if (match) renderFaq(match);
-  else { bot(text('fallback')); renderTopics(); }
+  else { botLoading(text('fallback'), renderTopics); }
 };
 
 languageSelect.onchange = () => {

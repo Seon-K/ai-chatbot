@@ -281,6 +281,28 @@ button {
   white-space: normal;
 }
 
+.loading-bubble {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loading-spinner {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #d9e4f4;
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .message-row.user .bubble-wrap {
   display: flex;
   justify-content: flex-end;
