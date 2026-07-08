@@ -161,6 +161,7 @@ button {
 }
 
 .header-actions select,
+.home-link,
 .icon-button {
   height: 36px;
   border: 1px solid var(--line);
@@ -171,6 +172,16 @@ button {
 
 .header-actions select {
   padding: 0 8px;
+}
+
+.home-link {
+  display: inline-grid;
+  place-items: center;
+  min-width: 58px;
+  padding: 0 10px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 900;
 }
 
 .icon-button {
